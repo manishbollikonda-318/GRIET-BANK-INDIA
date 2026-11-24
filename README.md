@@ -1,6 +1,16 @@
 # GRIET BANK INDIA - Core Banking Management System
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online%20Simulator-brightgreen?style=for-the-badge&logo=google-chrome)](https://manishbollikonda-318.github.io/GRIET-BANK-INDIA/)
+[![Download JAR](https://img.shields.io/badge/Download-Standalone%20JAR-blue?style=for-the-badge&logo=java)](https://github.com/manishbollikonda-318/GRIET-BANK-INDIA/releases/tag/v1.0.0)
+
 A robust, modular, and real-time desktop Banking Management System developed in **Java** utilizing the **Java Swing** framework and core **Object-Oriented Programming (OOP)** design principles for **GRIET Bank of India**.
+
+---
+
+## 🌐 Live Access Options
+
+- 🌐 **Interactive Web Demo:** [https://manishbollikonda-318.github.io/GRIET-BANK-INDIA/](https://manishbollikonda-318.github.io/GRIET-BANK-INDIA/) *(Test transactions, account creation, and table search directly in your browser)*
+- ⬇️ **Download Executable .JAR:** [GRIET_Bank_India.jar (GitHub Release v1.0.0)](https://github.com/manishbollikonda-318/GRIET-BANK-INDIA/releases/tag/v1.0.0) *(Double-click to run on any computer with Java)*
 
 ---
 
