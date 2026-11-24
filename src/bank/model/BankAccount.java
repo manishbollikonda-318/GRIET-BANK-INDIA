@@ -44,7 +44,7 @@ public abstract class BankAccount implements Serializable {
         }
         if ((this.balance - amount) < this.minimumBalance) {
             throw new InsufficientBalanceException(
-                String.format("Insufficient funds. Minimum required balance is $%.2f (Current Balance: $%.2f)",
+                String.format("Insufficient funds. Minimum required balance is ₹%.2f (Current Balance: ₹%.2f)",
                         minimumBalance, balance)
             );
         }
@@ -73,7 +73,7 @@ public abstract class BankAccount implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("[%s] #%s | %s | Balance: $%.2f | %s",
+        return String.format("[%s] #%s | %s | Balance: ₹%.2f | %s",
                 getAccountType(), accountNumber, accountHolderName, balance, getSpecificDetail());
     }
 }

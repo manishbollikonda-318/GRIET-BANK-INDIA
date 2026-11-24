@@ -45,23 +45,23 @@ The application defines a rich, extensible Object-Oriented account hierarchy:
    - Enforces abstract contracts: `getAccountType()` and `getSpecificDetail()`.
 2. **`SavingsAccount` (Subclass of `BankAccount`):**
    - Designed for personal savings.
-   - Enforces minimum opening balance of $2,000.00.
+   - Enforces minimum opening balance of ₹2,000.00.
    - Accrues annual interest at a fixed 5.0% rate (`balance * 0.05`).
-   - Introduces a per-transaction withdrawal cap (`maxWithdrawLimit`, default $5,000.00). Overrides `withdraw()` to validate limits before delegating to superclass.
+   - Introduces a per-transaction withdrawal cap (`maxWithdrawLimit`, default ₹5,000.00). Overrides `withdraw()` to validate limits before delegating to superclass.
 3. **`CurrentAccount` (Subclass of `BankAccount`):**
    - Tailored for business and enterprise banking.
-   - Enforces minimum opening balance of $5,000.00.
+   - Enforces minimum opening balance of ₹5,000.00.
    - Mandates commercial verification via a unique `tradeLicenseNumber`.
 4. **`StudentAccount` (Multilevel Subclass of `SavingsAccount`):**
    - Subsidized account designed for college students.
-   - Enforces a reduced minimum opening balance of only $100.00.
+   - Enforces a reduced minimum opening balance of only ₹100.00.
    - Binds to the student's educational institution (e.g., "GRIET Hyderabad").
-   - Inherits savings withdrawal limit mechanics with a generous default cap of $20,000.00.
+   - Inherits savings withdrawal limit mechanics with a generous default cap of ₹20,000.00.
 
 #### C. Dynamic Account Creation Subsystem (`bank.gui.AccountDialog`)
 - Consolidates account opening into a single, cohesive, dynamic modal dialog (replacing legacy multi-frame bloat).
 - Employs an event-driven `JComboBox` selector for account types:
-  - Selecting "Savings Account" dynamically configures the field label to "Max Withdrawal Limit ($)".
+  - Selecting "Savings Account" dynamically configures the field label to "Max Withdrawal Limit (₹)".
   - Selecting "Current Account" dynamically configures the field label to "Trade License Number".
   - Selecting "Student Account" dynamically configures the field label to "Institution Name".
 - Performs real-time multi-tier client validation: ensures non-empty names, positive numeric amounts, and compliance with the specific account type's minimum balance rules.
@@ -80,7 +80,7 @@ The application defines a rich, extensible Object-Oriented account hierarchy:
 
 #### E. Interactive Ledger Directory & Real-Time Filter (`bank.gui.AccountListFrame`)
 - Renders all registered accounts inside a structured, read-only `JTable` within a `JScrollPane`.
-- Displays columns: Account #, Holder Name, Account Type, Balance ($), and Special Parameters.
+- Displays columns: Account #, Holder Name, Account Type, Balance (₹), and Special Parameters.
 - Features an instantaneous, case-insensitive keyword search bar powered by `TableRowSorter` and regex filtering. As characters are typed or deleted, matching records filter dynamically without disk access.
 - Includes a manual "Refresh" trigger and clean window management.
 

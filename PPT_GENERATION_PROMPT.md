@@ -99,10 +99,10 @@ Create a professional, highly articulate 12-Slide PowerPoint Presentation Deck f
 - **Comparison Matrix:**
   | Account Type | Min. Opening Balance | Per-Tx Limit | Special Invariant / Feature |
   | :--- | :--- | :--- | :--- |
-  | **Savings Account** | $2,000.00 | Configurable ($5,000 default) | 5.0% Annual Interest Accrual (`balance * 0.05`) |
-  | **Current Account** | $5,000.00 | Standard Banking Rule | Mandatory Commercial Trade License Number |
-  | **Student Account** | $100.00 | $20,000.00 per transaction | Educational Affiliation Verification ("GRIET Hyderabad") |
-- **Speaker Notes:** "We engineered three distinct account tiers. Savings accounts enforce a $2,000 minimum balance and calculate 5% interest. Current accounts require a business trade license and a $5,000 minimum balance. Student accounts offer a subsidized $100 minimum opening balance."
+  | **Savings Account** | ₹2,000.00 | Configurable (₹5,000 default) | 5.0% Annual Interest Accrual (`balance * 0.05`) |
+  | **Current Account** | ₹5,000.00 | Standard Banking Rule | Mandatory Commercial Trade License Number |
+  | **Student Account** | ₹100.00 | ₹20,000.00 per transaction | Educational Affiliation Verification ("GRIET Hyderabad") |
+- **Speaker Notes:** "We engineered three distinct account tiers. Savings accounts enforce a ₹2,000 minimum balance and calculate 5% interest. Current accounts require a business trade license and a ₹5,000 minimum balance. Student accounts offer a subsidized ₹100 minimum opening balance."
 
 ---
 

@@ -44,9 +44,9 @@ The software architecture strictly adheres to **Object-Oriented Programming (OOP
 
 - **🔐 Administrative Gatekeeper:** Secure staff login (`admin` / `admin`) with password masking and keyboard accelerator (`Enter` key submission).
 - **🏦 Multi-Tier Account Governance:**
-  - **Savings Account:** $2,000.00 minimum opening balance, per-transaction withdrawal caps, and 5.0% annual interest calculation (`balance * 0.05`).
-  - **Current Account:** $5,000.00 minimum opening balance with mandatory commercial Trade License verification.
-  - **Student Account:** Subsidized $100.00 minimum balance with institutional affiliation tracking ("GRIET Hyderabad").
+  - **Savings Account:** ₹2,000.00 minimum opening balance, per-transaction withdrawal caps, and 5.0% annual interest calculation (`balance * 0.05`).
+  - **Current Account:** ₹5,000.00 minimum opening balance with mandatory commercial Trade License verification.
+  - **Student Account:** Subsidized ₹100.00 minimum balance with institutional affiliation tracking ("GRIET Hyderabad").
 - **⚡ Dynamic Event-Driven UI:** A unified modal dialog (`AccountDialog.java`) dynamically swaps form labels and validation rules in real time based on the selected account type.
 - **💵 Financial Transaction Engine:** Synchronized, atomic deposit and withdrawal operations with sequential multi-step validation.
 - **📋 Live Directory Search:** Interactive `JTable` integrated with `TableRowSorter` for real-time regex filtering across customer names and account IDs.
@@ -59,9 +59,9 @@ The software architecture strictly adheres to **Object-Oriented Programming (OOP
 
 | Account Type | Minimum Opening Balance | Per-Transaction Limit | Distinctive Feature / Invariant |
 | :--- | :--- | :--- | :--- |
-| **Savings Account** | $2,000.00 | Configurable ($5,000 default) | 5.0% Annual Interest Accrual |
-| **Current Account** | $5,000.00 | Standard Banking Rule | Mandatory Trade License Registration |
-| **Student Account** | $100.00 | $20,000.00 per transaction | Educational Institution Verification |
+| **Savings Account** | ₹2,000.00 | Configurable (₹5,000 default) | 5.0% Annual Interest Accrual |
+| **Current Account** | ₹5,000.00 | Standard Banking Rule | Mandatory Trade License Registration |
+| **Student Account** | ₹100.00 | ₹20,000.00 per transaction | Educational Institution Verification |
 
 ---
 
@@ -86,7 +86,7 @@ The software architecture strictly adheres to **Object-Oriented Programming (OOP
       ┌────────▼─────────┐
       │  StudentAccount  │
       │  + institution   │
-      │  + $100 min bal  │
+      │  + ₹100 min bal  │
       └──────────────────┘
 ```
 
@@ -172,13 +172,13 @@ java -jar GRIET_Bank_India.jar
 | :--- | :--- | :--- | :--- | :--- |
 | **TC-01** | Admin Authentication | `admin` / `admin` | Dashboard launched | **PASS** |
 | **TC-02** | Invalid Authentication | `admin` / `wrong` | Access denied alert | **PASS** |
-| **TC-03** | Create Savings Account | Name: "John", Bal: $3000, Limit: $1000 | 5-digit ID created | **PASS** |
-| **TC-04** | Min Balance Invariant | Savings Bal: $500 (&lt; $2000) | Rejected with alert | **PASS** |
-| **TC-05** | Positive Deposit | Amount: $500.00 | Balance incremented | **PASS** |
-| **TC-06** | Negative Deposit Rejection | Amount: -$100.00 | `InvalidAmountException` | **PASS** |
-| **TC-07** | Valid Withdrawal | Amount: $1,000.00 | Balance debited | **PASS** |
-| **TC-08** | Withdrawal Cap Check | Amount: $8,000 (&gt; $5000 limit) | `MaxWithdrawLimitException` | **PASS** |
-| **TC-09** | Minimum Balance Breach | Amount: $40,000 (leaves &lt; min) | `InsufficientBalanceException` | **PASS** |
+| **TC-03** | Create Savings Account | Name: "John", Bal: ₹3000, Limit: ₹1000 | 5-digit ID created | **PASS** |
+| **TC-04** | Min Balance Invariant | Savings Bal: ₹500 (&lt; ₹2000) | Rejected with alert | **PASS** |
+| **TC-05** | Positive Deposit | Amount: ₹500.00 | Balance incremented | **PASS** |
+| **TC-06** | Negative Deposit Rejection | Amount: -₹100.00 | `InvalidAmountException` | **PASS** |
+| **TC-07** | Valid Withdrawal | Amount: ₹1,000.00 | Balance debited | **PASS** |
+| **TC-08** | Withdrawal Cap Check | Amount: ₹8,000 (&gt; ₹5000 limit) | `MaxWithdrawLimitException` | **PASS** |
+| **TC-09** | Minimum Balance Breach | Amount: ₹40,000 (leaves &lt; min) | `InsufficientBalanceException` | **PASS** |
 | **TC-10** | Non-Existent Account | ID: `99999` | `AccountNotFoundException` | **PASS** |
 | **TC-11** | Real-Time Table Filter | Query: `"Alex"` | Table isolates row | **PASS** |
 | **TC-12** | Cold Boot Recovery | Application Restart | State reloaded from `data.bin` | **PASS** |

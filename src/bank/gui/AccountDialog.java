@@ -48,11 +48,11 @@ public class AccountDialog extends JDialog {
         txtName = new JTextField();
         form.add(txtName);
 
-        form.add(new JLabel("Initial Deposit ($):"));
+        form.add(new JLabel("Initial Deposit (₹):"));
         txtBalance = new JTextField();
         form.add(txtBalance);
 
-        lblExtra = new JLabel("Max Withdraw Limit ($):");
+        lblExtra = new JLabel("Max Withdraw Limit (₹):");
         txtExtra = new JTextField("5000");
         form.add(lblExtra);
         form.add(txtExtra);
@@ -85,7 +85,7 @@ public class AccountDialog extends JDialog {
     private void updateExtraField() {
         String type = (String) cmbType.getSelectedItem();
         if ("Savings Account".equals(type)) {
-            lblExtra.setText("Max Withdraw Limit ($):");
+            lblExtra.setText("Max Withdraw Limit (₹):");
             txtExtra.setText("5000");
         } else if ("Current Account".equals(type)) {
             lblExtra.setText("Trade License Number:");
@@ -126,7 +126,7 @@ public class AccountDialog extends JDialog {
                 double limit = Double.parseDouble(extra);
                 if (balance < SavingsAccount.DEFAULT_MIN_BALANCE) {
                     JOptionPane.showMessageDialog(this,
-                            "Savings account requires minimum opening balance of $" + SavingsAccount.DEFAULT_MIN_BALANCE,
+                            "Savings account requires minimum opening balance of ₹" + SavingsAccount.DEFAULT_MIN_BALANCE,
                             "Minimum Balance Violation", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -134,7 +134,7 @@ public class AccountDialog extends JDialog {
             } else if ("Current Account".equals(type)) {
                 if (balance < CurrentAccount.DEFAULT_MIN_BALANCE) {
                     JOptionPane.showMessageDialog(this,
-                            "Current account requires minimum opening balance of $" + CurrentAccount.DEFAULT_MIN_BALANCE,
+                            "Current account requires minimum opening balance of ₹" + CurrentAccount.DEFAULT_MIN_BALANCE,
                             "Minimum Balance Violation", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -142,7 +142,7 @@ public class AccountDialog extends JDialog {
             } else {
                 if (balance < StudentAccount.STUDENT_MIN_BALANCE) {
                     JOptionPane.showMessageDialog(this,
-                            "Student account requires minimum opening balance of $" + StudentAccount.STUDENT_MIN_BALANCE,
+                            "Student account requires minimum opening balance of ₹" + StudentAccount.STUDENT_MIN_BALANCE,
                             "Minimum Balance Violation", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
@@ -154,7 +154,7 @@ public class AccountDialog extends JDialog {
                     "Account Created Successfully!\n" +
                     "Account Number: " + newAccount.getAccountNumber() + "\n" +
                     "Holder: " + newAccount.getAccountHolderName() + "\n" +
-                    "Opening Balance: $" + String.format("%.2f", newAccount.getBalance()),
+                    "Opening Balance: ₹" + String.format("%.2f", newAccount.getBalance()),
                     "Account Created", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (NumberFormatException ex) {

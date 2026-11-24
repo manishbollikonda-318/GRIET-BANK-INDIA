@@ -30,7 +30,7 @@ public class SavingsAccount extends BankAccount {
             throws InsufficientBalanceException, InvalidAmountException, MaxWithdrawLimitException {
         if (amount > maxWithdrawLimit) {
             throw new MaxWithdrawLimitException(
-                String.format("Withdrawal of $%.2f exceeds transaction limit of $%.2f", amount, maxWithdrawLimit)
+                String.format("Withdrawal of ₹%.2f exceeds transaction limit of ₹%.2f", amount, maxWithdrawLimit)
             );
         }
         super.withdraw(amount);
@@ -51,6 +51,6 @@ public class SavingsAccount extends BankAccount {
 
     @Override
     public String getSpecificDetail() {
-        return String.format("Withdraw Limit: $%.2f | Int. Rate: 5%%", maxWithdrawLimit);
+        return String.format("Withdraw Limit: ₹%.2f | Int. Rate: 5%%", maxWithdrawLimit);
     }
 }

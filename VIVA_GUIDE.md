@@ -48,14 +48,14 @@ When an examiner asks, *"Where have you implemented Object-Oriented Programming?
 - **What it is:** Mechanism where a child class acquires properties and behaviors of a parent class.
 - **Where in code:**
   - **Single Inheritance:** `SavingsAccount extends BankAccount` and `CurrentAccount extends BankAccount`. They inherit `deposit()`, `getBalance()`, and fields from `BankAccount`.
-  - **Multilevel Inheritance:** `StudentAccount extends SavingsAccount`, which in turn extends `BankAccount`. `StudentAccount` inherits all savings account rules (such as withdrawal caps) while defining a much lower minimum balance ($100.00).
+  - **Multilevel Inheritance:** `StudentAccount extends SavingsAccount`, which in turn extends `BankAccount`. `StudentAccount` inherits all savings account rules (such as withdrawal caps) while defining a much lower minimum balance (₹100.00).
 
 ### 4. Polymorphism
 - **What it is:** Ability of an object to take many forms.
 - **Where in code:**
   - **Method Overriding (Runtime Polymorphism):** `SavingsAccount` overrides `withdraw(double amount)`. Before deducting funds, it validates whether `amount > maxWithdrawLimit`. If valid, it invokes `super.withdraw(amount)`.
   - **Dynamic Method Dispatch:** In `Bank.java` and `AccountListFrame.java`, accounts are stored in a `List<BankAccount>`. When iterating through the list and invoking `acc.toString()` or `acc.getAccountType()`, the JVM dynamically calls the child's implementation at runtime.
-  - **Method Overloading (Compile-Time Polymorphism):** In `SavingsAccount`, two overloaded constructors exist: one with default minimum balance (`$2,000`), and one accepting custom minimum balance.
+  - **Method Overloading (Compile-Time Polymorphism):** In `SavingsAccount`, two overloaded constructors exist: one with default minimum balance (`₹2,000`), and one accepting custom minimum balance.
 
 ---
 
@@ -75,11 +75,11 @@ When an examiner asks, *"Where have you implemented Object-Oriented Programming?
 
 ### `bank.model.CurrentAccount`
 - **Role:** Commercial checking account for businesses.
-- **Key Fields:** `tradeLicenseNumber`, default minimum balance `$5,000.00`.
+- **Key Fields:** `tradeLicenseNumber`, default minimum balance `₹5,000.00`.
 
 ### `bank.model.StudentAccount`
 - **Role:** Subsidized account for university students.
-- **Key Fields:** `institutionName`, minimum balance `$100.00`, maximum withdrawal `$20,000.00`.
+- **Key Fields:** `institutionName`, minimum balance `₹100.00`, maximum withdrawal `₹20,000.00`.
 
 ### `bank.model.Bank` (Business Logic Controller)
 - **Role:** Holds the collection of active accounts and coordinates transactions.
@@ -140,7 +140,7 @@ When an examiner asks, *"Where have you implemented Object-Oriented Programming?
 **Answer:** Checked exceptions inherit from `java.lang.Exception` and are checked at compile time; methods must either catch them or declare them using `throws`. Unchecked exceptions inherit from `RuntimeException`. We designed a custom checked exception hierarchy (`BankException`) to ensure that business constraints (like account not found or insufficient balance) are explicitly handled by the calling code.
 
 ### Q7: Explain the inheritance hierarchy in your accounts.
-**Answer:** `BankAccount` is the abstract root. `SavingsAccount` and `CurrentAccount` inherit from `BankAccount` (Hierarchical Inheritance). `StudentAccount` inherits from `SavingsAccount` (Multilevel Inheritance), reusing its withdrawal limit mechanics while providing a subsidized `$100` minimum balance.
+**Answer:** `BankAccount` is the abstract root. `SavingsAccount` and `CurrentAccount` inherit from `BankAccount` (Hierarchical Inheritance). `StudentAccount` inherits from `SavingsAccount` (Multilevel Inheritance), reusing its withdrawal limit mechanics while providing a subsidized `₹100` minimum balance.
 
 ### Q8: How does Method Overriding work in your application?
 **Answer:** In `SavingsAccount`, the `withdraw(double amount)` method overrides the `withdraw` method defined in `BankAccount`. It first checks whether `amount > maxWithdrawLimit`. If it exceeds the limit, it throws `MaxWithdrawLimitException`. Otherwise, it delegates to `super.withdraw(amount)` to execute the base balance deduction.

@@ -52,7 +52,7 @@ public class AccountListFrame extends JFrame {
         content.add(topPanel, BorderLayout.NORTH);
 
         // Table setup
-        String[] columns = {"Account #", "Holder Name", "Account Type", "Balance ($)", "Additional Details"};
+        String[] columns = {"Account #", "Holder Name", "Account Type", "Balance (₹)", "Additional Details"};
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

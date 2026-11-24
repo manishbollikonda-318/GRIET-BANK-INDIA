@@ -176,9 +176,9 @@ The system implements a decoupled, multi-tier architectural pattern:
 ### Module 2: Account Creation & Parameterization (`bank.gui.AccountDialog`)
 - Consolidates account generation into a single dynamic dialog.
 - Account selection dropdown toggles dynamic form requirements:
-  - **Savings Account:** Enforces $2,000.00 minimum opening balance; collects per-transaction withdrawal cap.
-  - **Current Account:** Enforces $5,000.00 minimum opening balance; collects business Trade License ID.
-  - **Student Account:** Enforces $100.00 minimum opening balance; collects Academic Institution name.
+  - **Savings Account:** Enforces ₹2,000.00 minimum opening balance; collects per-transaction withdrawal cap.
+  - **Current Account:** Enforces ₹5,000.00 minimum opening balance; collects business Trade License ID.
+  - **Student Account:** Enforces ₹100.00 minimum opening balance; collects Academic Institution name.
 - Generates an auto-incremented/pseudo-random 5-digit unique Account Number upon submission.
 
 ### Module 3: Financial Transactions (`bank.gui.TransactionDialog`)
@@ -254,8 +254,8 @@ classDiagram
     }
 
     class FileStorage {
-        +load(String path)$ Bank
-        +save(Bank bank, String path)$ boolean
+        +load(String path)₹ Bank
+        +save(Bank bank, String path)₹ boolean
     }
 
     BankAccount <|-- SavingsAccount : Inheritance
@@ -274,7 +274,7 @@ sequenceDiagram
     participant Account as SavingsAccount
     participant Storage as FileStorage
 
-    Operator->>UI: Enter Account # and Amount ($3,000)
+    Operator->>UI: Enter Account # and Amount (₹3,000)
     Operator->>UI: Click "Withdraw"
     UI->>Bank: withdraw("12345", 3000.0)
     Bank->>Bank: findAccount("12345")
@@ -290,7 +290,7 @@ sequenceDiagram
         Account->>Account: balance -= 3000.0
         Account-->>Bank: Success
         Bank-->>UI: Return updated balance
-        UI-->>Operator: Display "Withdrawal Successful" ($New Balance)
+        UI-->>Operator: Display "Withdrawal Successful" (₹New Balance)
     end
 ```
 
@@ -302,13 +302,13 @@ sequenceDiagram
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-01** | Staff Authentication (Valid) | User: `admin`, Pass: `admin` | Login approved; dashboard displays | Dashboard displays | **PASS** |
 | **TC-02** | Staff Authentication (Invalid) | User: `admin`, Pass: `wrong` | Error prompt; fields cleared | Error prompt displayed | **PASS** |
-| **TC-03** | Create Savings Account (Valid) | Name: `Alice`, Bal: `$5000`, Limit: `$2000` | Account created; 5-digit ID generated | Account created | **PASS** |
-| **TC-04** | Create Savings (Below Min Bal) | Name: `Bob`, Bal: `$1000` (< $2000) | Rejected with minimum balance alert | Prompt displayed; write aborted | **PASS** |
-| **TC-05** | Deposit (Positive Amount) | Acc: `Valid ID`, Amount: `$500.00` | Balance incremented by `$500.00` | Balance updated accurately | **PASS** |
-| **TC-06** | Deposit (Negative Amount) | Acc: `Valid ID`, Amount: `-$100.00` | `InvalidAmountException` thrown | Alert dialog displayed | **PASS** |
-| **TC-07** | Withdraw (Within Balance & Limit)| Acc: `Valid ID`, Amount: `$1,000.00` | Balance debited by `$1,000.00` | Debited correctly | **PASS** |
-| **TC-08** | Withdraw (Exceeds Limit) | Acc: `Savings ID`, Amount: `$8,000.00` | `MaxWithdrawLimitException` thrown | Transaction blocked | **PASS** |
-| **TC-09** | Withdraw (Breaches Min Balance) | Acc: `Valid ID`, Amount: `$15,000.00` | `InsufficientBalanceException` thrown | Transaction blocked | **PASS** |
+| **TC-03** | Create Savings Account (Valid) | Name: `Alice`, Bal: `₹5000`, Limit: `₹2000` | Account created; 5-digit ID generated | Account created | **PASS** |
+| **TC-04** | Create Savings (Below Min Bal) | Name: `Bob`, Bal: `₹1000` (< ₹2000) | Rejected with minimum balance alert | Prompt displayed; write aborted | **PASS** |
+| **TC-05** | Deposit (Positive Amount) | Acc: `Valid ID`, Amount: `₹500.00` | Balance incremented by `₹500.00` | Balance updated accurately | **PASS** |
+| **TC-06** | Deposit (Negative Amount) | Acc: `Valid ID`, Amount: `-₹100.00` | `InvalidAmountException` thrown | Alert dialog displayed | **PASS** |
+| **TC-07** | Withdraw (Within Balance & Limit)| Acc: `Valid ID`, Amount: `₹1,000.00` | Balance debited by `₹1,000.00` | Debited correctly | **PASS** |
+| **TC-08** | Withdraw (Exceeds Limit) | Acc: `Savings ID`, Amount: `₹8,000.00` | `MaxWithdrawLimitException` thrown | Transaction blocked | **PASS** |
+| **TC-09** | Withdraw (Breaches Min Balance) | Acc: `Valid ID`, Amount: `₹15,000.00` | `InsufficientBalanceException` thrown | Transaction blocked | **PASS** |
 | **TC-10** | Non-existent Account Lookup | Acc: `99999` | `AccountNotFoundException` thrown | "Account Not Found" prompt | **PASS** |
 | **TC-11** | Live Search Filter in Table | Query: `Alice` | Table displays only matching rows | Filter updated in real time | **PASS** |
 | **TC-12** | Cold Restart Data Persistence | Restart application | Previous accounts & balances reloaded | Reloaded identically from `data.bin` | **PASS** |

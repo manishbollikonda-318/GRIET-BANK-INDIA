@@ -47,7 +47,7 @@ public class TransactionDialog extends JDialog {
         txtAccountNum = new JTextField();
         form.add(txtAccountNum);
 
-        form.add(new JLabel("Amount ($):"));
+        form.add(new JLabel("Amount (₹):"));
         txtAmount = new JTextField();
         form.add(txtAmount);
         panel.add(form, BorderLayout.CENTER);
@@ -95,13 +95,13 @@ public class TransactionDialog extends JDialog {
                 bank.deposit(accNum, amount);
                 BankAccount acc = bank.findAccount(accNum);
                 JOptionPane.showMessageDialog(this,
-                        String.format("Successfully deposited $%.2f\nNew Balance: $%.2f", amount, acc.getBalance()),
+                        String.format("Successfully deposited ₹%.2f\nNew Balance: ₹%.2f", amount, acc.getBalance()),
                         "Deposit Complete", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 bank.withdraw(accNum, amount);
                 BankAccount acc = bank.findAccount(accNum);
                 JOptionPane.showMessageDialog(this,
-                        String.format("Successfully withdrew $%.2f\nRemaining Balance: $%.2f", amount, acc.getBalance()),
+                        String.format("Successfully withdrew ₹%.2f\nRemaining Balance: ₹%.2f", amount, acc.getBalance()),
                         "Withdrawal Complete", JOptionPane.INFORMATION_MESSAGE);
             }
             dispose();

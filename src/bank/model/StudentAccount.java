@@ -27,6 +27,6 @@ public class StudentAccount extends SavingsAccount {
 
     @Override
     public String getSpecificDetail() {
-        return "Institution: " + institutionName + " | Min Bal: $" + minimumBalance;
+        return "Institution: " + institutionName + " | Min Bal: ₹" + minimumBalance;
     }
 }
