@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRIET Bank of India — Live Interactive Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-hover: #1e40af;
+      --accent: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --window-bg: #f8fafc;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1e293b, #0f172a);
+      color: #f1f5f9;
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 32px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-text p {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f1f5f9;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    /* Hero notice */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(16, 185, 129, 0.1));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero-banner span {
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .hero-banner strong {
+      color: #60a5fa;
+    }
+
+    /* Simulated Window */
+    .window-frame {
+      background: var(--window-bg);
+      color: var(--text-dark);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .window-titlebar {
+      background: #e2e8f0;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .window-dots {
+      display: flex;
+      gap: 7px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .window-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .window-body {
+      padding: 36px 28px;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Screen 1: Login Frame */
+    .login-box {
+      width: 100%;
+      max-width: 380px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .login-box h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 4px;
+    }
+    .login-box .subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-control:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 11px;
+      background: #1e3a8a;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: #1e40af;
+    }
+    .hint-text {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 12px;
+    }
+
+    /* Screen 2: Dashboard */
+    .dashboard-view {
+      width: 100%;
+      max-width: 520px;
+      display: none;
+    }
+    .dashboard-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .dashboard-header h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #e0e7ff;
+      color: #3730a3;
+      margin-top: 6px;
+    }
+    .menu-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .menu-btn:hover {
+      border-color: #3b82f6;
+      background: #f8fafc;
+      transform: translateX(4px);
+    }
+    .menu-btn.exit-btn:hover {
+      border-color: #ef4444;
+      color: #dc2626;
+    }
+
+    /* Modal dialogs */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-card {
+      background: #ffffff;
+      color: #0f172a;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+    .modal-card.large {
+      max-width: 760px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .modal-header h3 {
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #94a3b8;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    /* Table styles */
+    .table-container {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      padding: 10px 12px;
+      font-weight: 700;
+      color: #334155;
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* Info cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .info-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card p, .info-card li {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .info-card ul {
+      list-style-position: inside;
+      margin-top: 8px;
+    }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🏛️</div>
+        <div class="brand-text">
+          <h1>GRIET BANK OF INDIA</h1>
+          <p>Real-Time Core Banking System • Java Desktop Live Simulator</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="https://github.com/manishbollikonda-318/GRIET-BANK-INDIA/releases/tag/v1.0.0" class="btn btn-primary" target="_blank">
+          ⬇️ Download .JAR File
+        </a>
+        <a href="https://github.com/manishbollikonda-318/GRIET-BANK-INDIA" class="btn btn-secondary" target="_blank">
+          📂 GitHub Repository
+        </a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div class="hero-banner">
+      <span>✨ <strong>Live Interactive Demo:</strong> Test and verify all banking operations (Account Creation, Deposit, Withdraw, Search) right in your browser!</span>
+      <span style="font-size: 12px; color: #94a3b8;">Default Admin Login: <code>admin</code> / <code>admin</code></span>
+    </div>
+
+    <!-- Simulated Desktop Window -->
+    <div class="window-frame">
+      <div class="window-titlebar">
+        <div class="window-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="window-title" id="windowTitle">GRIET Bank India — Secure Login</div>
+        <div style="width: 40px;"></div>
+      </div>
+
+      <div class="window-body">
+        <!-- View 1: Login Screen -->
+        <div class="login-box" id="loginView">
+          <h2>GRIET BANK INDIA</h2>
+          <p class="subtitle">Administrative Staff Portal</p>
+          <form id="loginForm">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="username" class="form-control" value="admin" required>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" id="password" class="form-control" value="admin" required>
+            </div>
+            <button type="submit" class="btn-submit">Login to Dashboard</button>
+            <div class="hint-text">Pre-filled with default demo credentials</div>
+          </form>
+        </div>
+
+        <!-- View 2: Main Dashboard -->
+        <div class="dashboard-view" id="dashboardView">
+          <div class="dashboard-header">
+            <h2>GRIET BANK OF INDIA</h2>
+            <div class="badge" id="accountCountBadge">Active Accounts: 3</div>
+          </div>
+          <div class="menu-grid">
+            <button class="menu-btn" onclick="openModal('createModal')">
+              <span>1. Create New Account</span>
+              <span>➕</span>
+            </button>
+            <button class="menu-btn" onclick="openTxModal('DEPOSIT')">
+              <span>2. Deposit Funds</span>
+              <span>💵</span>
+            </button>
+            <button class="menu-btn" onclick="openTxModal('WITHDRAW')">
+              <span>3. Withdraw Funds</span>
+              <span>💳</span>
+            </button>
+            <button class="menu-btn" onclick="openAccountList()">
+              <span>4. View Account Directory</span>
+              <span>📋</span>
+            </button>
+            <button class="menu-btn exit-btn" onclick="logout()">
+              <span>5. Lock & Logout</span>
+              <span>🔒</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Modal 1: Create Account -->
+    <div class="modal-overlay" id="createModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Open New Bank Account</h3>
+          <button class="modal-close" onclick="closeModal('createModal')">&times;</button>
+        </div>
+        <form id="createForm" onsubmit="handleCreateAccount(event)">
+          <div class="form-group">
+            <label>Account Type</label>
+            <select id="accType" class="form-control" onchange="updateAccountTypeFields()">
+              <option value="Savings Account">Savings Account (Min Bal: $2,000)</option>
+              <option value="Current Account">Current Account (Min Bal: $5,000)</option>
+              <option value="Student Account">Student Account (Min Bal: $100)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Account Holder Name</label>
+            <input type="text" id="accHolder" class="form-control" placeholder="e.g. John Doe" required>
+          </div>
+          <div class="form-group">
+            <label>Initial Opening Deposit ($)</label>
+            <input type="number" id="accBalance" class="form-control" placeholder="5000" min="100" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label id="extraFieldLabel">Max Withdrawal Limit ($)</label>
+            <input type="text" id="accExtra" class="form-control" value="5000" required>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('createModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 2: Transaction (Deposit / Withdraw) -->
+    <div class="modal-overlay" id="txModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="txModalTitle">Deposit Funds</h3>
+          <button class="modal-close" onclick="closeModal('txModal')">&times;</button>
+        </div>
+        <form id="txForm" onsubmit="handleTransaction(event)">
+          <div class="form-group">
+            <label>5-Digit Account Number</label>
+            <input type="text" id="txAccNum" class="form-control" placeholder="e.g. 10245" required>
+          </div>
+          <div class="form-group">
+            <label>Amount ($)</label>
+            <input type="number" id="txAmount" class="form-control" placeholder="500.00" min="1" step="0.01" required>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('txModal')">Cancel</button>
+            <button type="submit" id="txSubmitBtn" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 3: Account Directory -->
+    <div class="modal-overlay" id="listModal">
+      <div class="modal-card large">
+        <div class="modal-header">
+          <h3>Registered Account Directory</h3>
+          <button class="modal-close" onclick="closeModal('listModal')">&times;</button>
+        </div>
+        <div class="form-group">
+          <input type="text" id="searchFilter" class="form-control" placeholder="🔍 Quick Search by Account #, Name, or Type..." oninput="renderTable()">
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Account #</th>
+                <th>Holder Name</th>
+                <th>Type</th>
+                <th>Balance ($)</th>
+                <th>Special Detail</th>
+              </tr>
+            </thead>
+            <tbody id="accountsTableBody">
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="resetDefaultData()">Reset Demo Data</button>
+          <button type="button" class="btn btn-primary" onclick="closeModal('listModal')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture & Guide Section -->
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>⚡ Run Native Java App on Mac/PC</h4>
+        <p>You can execute the real Java Swing GUI window on your machine right now:</p>
+        <ul style="margin-top: 10px;">
+          <li><strong>Clone:</strong> <code>git clone https://github.com/manishbollikonda-318/GRIET-BANK-INDIA.git</code></li>
+          <li><strong>Run macOS/Linux:</strong> <code>./run.sh</code></li>
+          <li><strong>Run Windows:</strong> <code>run.bat</code></li>
+          <li><strong>Or Double-Click:</strong> <code>GRIET_Bank_India.jar</code></li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>🏛️ Core OOP Principles Used</h4>
+        <ul>
+          <li><strong>Encapsulation:</strong> Private balances guarded by <code>deposit()</code> & <code>withdraw()</code>.</li>
+          <li><strong>Inheritance:</strong> <code>SavingsAccount</code> & <code>CurrentAccount</code> extend <code>BankAccount</code>.</li>
+          <li><strong>Polymorphism:</strong> Overridden <code>withdraw()</code> enforcing per-transaction caps.</li>
+          <li><strong>Abstraction:</strong> Abstract <code>BankAccount</code> with abstract contract methods.</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h4>📄 Full Project Documentation</h4>
+        <p>Complete academic reports and viva guides are located in the repository:</p>
+        <ul style="margin-top: 10px;">
+          <li><a href="https://github.com/manishbollikonda-318/GRIET-BANK-INDIA/blob/main/PROJECT_REPORT.md" target="_blank" style="color: #60a5fa;">PROJECT_REPORT.md</a> (Formal Academic Report)</li>
+          <li><a href="https://github.com/manishbollikonda-318/GRIET-BANK-INDIA/blob/main/VIVA_GUIDE.md" target="_blank" style="color: #60a5fa;">VIVA_GUIDE.md</a> (20+ Viva Voce Q&A)</li>
+          <li><a href="https://github.com/manishbollikonda-318/GRIET-BANK-INDIA/blob/main/README.md" target="_blank" style="color: #60a5fa;">README.md</a> (System Manual)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Initial Seed Accounts matching Java seed data
+    const DEFAULT_ACCOUNTS = [
+      { id: "10245", name: "Alex Morgan", type: "Savings Account", balance: 12500.00, extra: "Withdraw Limit: $4,000 | 5% Interest", minBal: 2000, limit: 4000 },
+      { id: "10892", name: "Global Trading LLC", type: "Current Account", balance: 45000.00, extra: "Trade License: TL-78921-X", minBal: 5000, limit: Infinity },
+      { id: "11043", name: "Emily Watson", type: "Student Account", balance: 1500.00, extra: "Institution: GRIET Hyderabad", minBal: 100, limit: 20000 }
+    ];
+
+    let accounts = JSON.parse(localStorage.getItem('griet_bank_accounts')) || DEFAULT_ACCOUNTS;
+    let currentTxMode = 'DEPOSIT';
+
+    function saveState() {
+      localStorage.setItem('griet_bank_accounts', JSON.stringify(accounts));
+      document.getElementById('accountCountBadge').innerText = `Active Accounts: ${accounts.length}`;
+    }
+
+    function resetDefaultData() {
+      if (confirm('Reset demo ledger to original 3 seed accounts?')) {
+        accounts = JSON.parse(JSON.stringify(DEFAULT_ACCOUNTS));
+        saveState();
+        renderTable();
+      }
+    }
+
+    // Login handler
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      if (u === 'admin' && p === 'admin') {
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('dashboardView').style.display = 'block';
+        document.getElementById('windowTitle').innerText = 'GRIET Bank India — Operations Dashboard';
+        saveState();
+      } else {
+        alert('Invalid Credentials! Default is admin / admin');
+      }
+    });
+
+    function logout() {
+      document.getElementById('dashboardView').style.display = 'none';
+      document.getElementById('loginView').style.display = 'block';
+      document.getElementById('windowTitle').innerText = 'GRIET Bank India — Secure Login';
+    }
+
+    // Dynamic fields for Account Dialog
+    function updateAccountTypeFields() {
+      const type = document.getElementById('accType').value;
+      const label = document.getElementById('extraFieldLabel');
+      const input = document.getElementById('accExtra');
+      const bal = document.getElementById('accBalance');
+
+      if (type === 'Savings Account') {
+        label.innerText = 'Max Withdrawal Limit ($)';
+        input.value = '5000';
+        bal.placeholder = 'Minimum: $2,000';
+      } else if (type === 'Current Account') {
+        label.innerText = 'Trade License Number';
+        input.value = 'TL-2024-';
+        bal.placeholder = 'Minimum: $5,000';
+      } else {
+        label.innerText = 'Institution Name';
+        input.value = 'GRIET Hyderabad';
+        bal.placeholder = 'Minimum: $100';
+      }
+    }
+
+    // Create Account Handler
+    function handleCreateAccount(e) {
+      e.preventDefault();
+      const type = document.getElementById('accType').value;
+      const name = document.getElementById('accHolder').value.trim();
+      const balance = parseFloat(document.getElementById('accBalance').value);
+      const extra = document.getElementById('accExtra').value.trim();
+
+      let minBal = 2000;
+      let limit = Infinity;
+      let extraText = '';
+
+      if (type === 'Savings Account') {
+        minBal = 2000;
+        limit = parseFloat(extra) || 5000;
+        extraText = `Withdraw Limit: $${limit.toFixed(2)} | 5% Interest`;
+        if (balance < minBal) {
+          alert(`Savings Account requires a minimum opening deposit of $${minBal.toFixed(2)}`);
+          return;
+        }
+      } else if (type === 'Current Account') {
+        minBal = 5000;
+        extraText = `Trade License: ${extra}`;
+        if (balance < minBal) {
+          alert(`Current Account requires a minimum opening deposit of $${minBal.toFixed(2)}`);
+          return;
+        }
+      } else {
+        minBal = 100;
+        limit = 20000;
+        extraText = `Institution: ${extra}`;
+        if (balance < minBal) {
+          alert(`Student Account requires a minimum opening deposit of $${minBal.toFixed(2)}`);
+          return;
+        }
+      }
+
+      const newId = String(Math.floor(10000 + Math.random() * 90000));
+      accounts.push({ id: newId, name, type, balance, extra: extraText, minBal, limit });
+      saveState();
+
+      alert(`✅ Account Created Successfully!\n\nAccount Number: #${newId}\nHolder: ${name}\nBalance: $${balance.toFixed(2)}`);
+      closeModal('createModal');
+      document.getElementById('createForm').reset();
+      updateAccountTypeFields();
+    }
+
+    // Transaction Modal
+    function openTxModal(mode) {
+      currentTxMode = mode;
+      document.getElementById('txModalTitle').innerText = mode === 'DEPOSIT' ? 'Deposit Funds' : 'Withdraw Funds';
+      document.getElementById('txSubmitBtn').innerText = mode === 'DEPOSIT' ? 'Confirm Deposit' : 'Confirm Withdrawal';
+      document.getElementById('txForm').reset();
+      openModal('txModal');
+    }
+
+    function handleTransaction(e) {
+      e.preventDefault();
+      const accNum = document.getElementById('txAccNum').value.trim();
+      const amt = parseFloat(document.getElementById('txAmount').value);
+
+      if (isNaN(amt) || amt <= 0) {
+        alert('Invalid Amount! Must be greater than $0.');
+        return;
+      }
+
+      const acc = accounts.find(a => a.id === accNum);
+      if (!acc) {
+        alert(`Account Error: No account registered with number #${accNum}`);
+        return;
+      }
+
+      if (currentTxMode === 'DEPOSIT') {
+        acc.balance += amt;
+        saveState();
+        alert(`✅ Deposit Successful!\nAccount: #${acc.id} (${acc.name})\nAmount Deposited: $${amt.toFixed(2)}\nNew Balance: $${acc.balance.toFixed(2)}`);
+        closeModal('txModal');
+      } else {
+        // Withdraw validation
+        if (acc.limit && amt > acc.limit) {
+          alert(`Transaction Limit Exceeded!\nMaximum withdrawal allowed per transaction is $${acc.limit.toFixed(2)}`);
+          return;
+        }
+        if ((acc.balance - amt) < acc.minBal) {
+          alert(`Insufficient Balance!\nMinimum required balance is $${acc.minBal.toFixed(2)}.\nCurrent balance is $${acc.balance.toFixed(2)}.`);
+          return;
+        }
+        acc.balance -= amt;
+        saveState();
+        alert(`✅ Withdrawal Successful!\nAccount: #${acc.id} (${acc.name})\nAmount Withdrawn: $${amt.toFixed(2)}\nRemaining Balance: $${acc.balance.toFixed(2)}`);
+        closeModal('txModal');
+      }
+    }
+
+    // Account List Modal & Search Table
+    function openAccountList() {
+      renderTable();
+      openModal('listModal');
+    }
+
+    function renderTable() {
+      const query = (document.getElementById('searchFilter').value || '').toLowerCase();
+      const tbody = document.getElementById('accountsTableBody');
+      tbody.innerHTML = '';
+
+      const filtered = accounts.filter(a => 
+        a.id.toLowerCase().includes(query) ||
+        a.name.toLowerCase().includes(query) ||
+        a.type.toLowerCase().includes(query) ||
+        a.extra.toLowerCase().includes(query)
+      );
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:20px;">No accounts found matching query</td></tr>';
+        return;
+      }
+
+      filtered.forEach(a => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>#${a.id}</strong></td>
+          <td>${a.name}</td>
+          <td><span class="badge" style="background:#f1f5f9; color:#1e293b; border:1px solid #cbd5e1;">${a.type}</span></td>
+          <td style="color:#059669; font-weight:700;">$${a.balance.toFixed(2)}</td>
+          <td style="color:#64748b; font-size:12px;">${a.extra}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Modal helpers
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // Initialize count
+    saveState();
+  </script>
+</body>
+</html>
